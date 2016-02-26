@@ -1,0 +1,55 @@
+FORMAT: 1A
+HOST: https://server1.bohemiaenergy.cz/wsproxy/api/
+
+# BEE WS Proxy
+
+Web service proxy for BEE integration to ZIS.
+
+## Sessions [/sessions]
+
+User sessions.
+
+### Create Session [POST]
+
+Create a new session for an end-user.
+
++ Request
+
+    + Attributes
+        + userName: `josefnovak` (string, required) - User login name.
+        + password: `Heslo01` (string, required) - User login password.
+
+    + Body
+
+            {
+                "userName": "josefnovak",
+                "password": "Heslo01"
+            }
+
++ Response 201 (application/vnd.cz.bohemiaenergy.wsproxy.session+json; version=1.0)
+
+        {
+            "token": "53551050-0000-48fc-bf25-354c345786dc",
+            "created": "2016-02-26T13:15:23+01:00",
+            "expires": "2016-02-26T14:42:23+01:00",
+            "user": {
+                "userName": "josefnovak"
+            }
+        }
+
+## Account Detail [/accounts/{accountId}]
+
+Detail of an account.
+
++ Parameters
+    + accountId: `1001` (number, required) - Id of the account.
+
+### Get Account Detail [GET]
+
+Retrieve the detail of an account by its id.
+
++ Response 200 (application/vnd.cz.bohemiaenergy.wsproxy.account+json; version=1.0)
+
+        {
+            "accountNumber": "123456"
+        }
