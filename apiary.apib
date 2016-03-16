@@ -26,30 +26,90 @@ Create a new session for an end-user.
                 "password": "Heslo01"
             }
 
-+ Response 201 (application/vnd.cz.bohemiaenergy.wsproxy.session+json; version=1.0)
++ Response 201 (application/vnd.cz.bohemiaenergy.wsproxy.session.detail+json; version=1.0)
 
-        {
-            "token": "53551050-0000-48fc-bf25-354c345786dc",
-            "created": "2016-02-26T13:15:23+01:00",
-            "expires": "2016-02-26T14:42:23+01:00",
-            "user": {
-                "userName": "josefnovak"
+    + Attributes
+        + token: `53551050-0000-48fc-bf25-354c345786dc` (string, required) - Session token, UUID.
+
+    + Body
+
+            {
+                "token": "53551050-0000-48fc-bf25-354c345786dc"
             }
-        }
+
+
+## Accounts [/accounts]
+
+List of accounts.
+
+### List Accounts [GET]
+
+Find accounts.
+
++ Attributes
+    + accountNumber: `12345678` (string) - Account number.
+    + customerId: `1001` (number) - Customer id.
+
++ Response 200 (application/vnd.cz.bohemiaenergy.wsproxy.account.list+json; version=1.0)
+
+    + Attributes
+        + id: `2001` (number, required) - Id of the account.
+        + accountNumber: `12345678` (string, required) - Account number.
+        + url: `https://server1.bohemiaenergy.cz/wsproxy/api/accounts/2001` (string, required) - URL of account detail.
+
+    + Body
+
+            [
+                {
+                    "id": 2001,
+                    "accountNumber": "12345678",
+                    "url": "https://server1.bohemiaenergy.cz/wsproxy/api/accounts/2001"
+                },
+                {
+                    "id": 2002,
+                    "accountNumber": "87654321",
+                    "url": "https://server1.bohemiaenergy.cz/wsproxy/api/accounts/2002"
+                }
+            ]
+
 
 ## Account Detail [/accounts/{accountId}]
 
 Detail of an account.
 
 + Parameters
-    + accountId: `1001` (number, required) - Id of the account.
+    + accountId: `2001` (number) - Id of the account.
 
 ### Get Account Detail [GET]
 
 Retrieve the detail of an account by its id.
 
-+ Response 200 (application/vnd.cz.bohemiaenergy.wsproxy.account+json; version=1.0)
++ Response 200 (application/vnd.cz.bohemiaenergy.wsproxy.account.detail+json; version=1.0)
 
-        {
-            "accountNumber": "123456"
-        }
+    + Attributes
+
+        + id: `2001` (number, required) - Id of the account.
+        + accountNumber: `12345678` (string, required) - Account number.
+        + invoiceDeliveryType: letter, registeredLetter, email, databox (enum, required) - Type of invoice delivery.
+        + invoiceMaturity: `???` (enum, required) - Invoice maturity.
+        + overpaymentSettlementType: paymentOrder, postalOrder (enum, required) - Type of overpayment settlement.
+        + paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
+        + currency: `CZK` (string, required) - Account currency.
+        + status: active, inactive (enum, required) - Status of the account.
+        + customer.id: `1001` (number, required) - Customer id.
+
+    + Body
+
+            {
+                "id": 2001,
+                "accountNumber": "12345678",
+                "invoiceDeliveryType": "letter",
+                "invoiceMaturity": "???",
+                "overpaymentSettlementType": "paymentOrder",
+                "paymentMethod": "SIPO",
+                "currency": "CZK",
+                "status": "active",
+                "customer": {
+                    "id": 1001
+                }
+            }
