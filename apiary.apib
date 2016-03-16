@@ -96,6 +96,9 @@ Retrieve the detail of an account by its id.
         + paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
         + currency: `CZK` (string, required) - Account currency.
         + status: active, inactive (enum, required) - Status of the account.
+        + payments.type: deposit, invoice, creditNote (enum, required) - Type of payment.
+        + payments.paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
+        + payments.account: `20005550267/0100` (string) - The external account that originates or receives the payment.
         + customer.id: `1001` (number, required) - Customer id.
 
     + Body
@@ -109,6 +112,23 @@ Retrieve the detail of an account by its id.
                 "paymentMethod": "SIPO",
                 "currency": "CZK",
                 "status": "active",
+                "payments": [
+                    {
+                        "type": "deposit",
+                        "paymentMethod": "SIPO",
+                        "account": "7666000444"
+                    },
+                    {
+                        "type": "invoice",
+                        "paymentMethod": "collectionOrder",
+                        "account": "20005550267/0100"
+                    },
+                    {
+                        "type": "creditNote",
+                        "paymentMethod": "paymentOrder",
+                        "account": "20005550267/0100"
+                    }
+                ],
                 "customer": {
                     "id": 1001
                 }
