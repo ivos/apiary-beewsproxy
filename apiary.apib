@@ -99,6 +99,8 @@ Retrieve the detail of an account by its id.
         + paymentMethods.paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
         + paymentMethods.account: `20005550267/0100` (string) - The external account that originates or receives the payment.
         + customer.id: `1001` (number, required) - Customer id.
+        + contracts.id: `5001` (number, required) - Contract id.
+        + contracts.contractNumber: `6000432` (number, required) - Contract number.
         + transactions.supplyPoint.id: `30001` (number, required) - Supply point id.
         + transactions.documentType: `???` (enum, required) - Type of document.
         + transactions.documentVariableSymbol: `555666777` (string) - Variable symbol of the document.
@@ -143,6 +145,16 @@ Retrieve the detail of an account by its id.
                 "customer": {
                     "id": 1001
                 },
+                "contracts": [
+                    {
+                        "id": 5001,
+                        "contractNumber": "6000432"
+                    },
+                    {
+                        "id": 5002,
+                        "contractNumber": "6000433"
+                    }
+                ],
                 "transactions": [
                     {
                         "supplyPoint": {
