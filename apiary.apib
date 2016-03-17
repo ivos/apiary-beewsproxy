@@ -93,13 +93,26 @@ Retrieve the detail of an account by its id.
         + invoiceDeliveryType: letter, registeredLetter, email, databox (enum, required) - Type of invoice delivery.
         + invoiceMaturity: `???` (enum, required) - Invoice maturity.
         + overpaymentSettlementType: paymentOrder, postalOrder (enum, required) - Type of overpayment settlement.
-        + paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
         + currency: `CZK` (string, required) - Account currency.
         + status: active, inactive (enum, required) - Status of the account.
-        + payments.type: deposit, invoice, creditNote (enum, required) - Type of payment.
-        + payments.paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
-        + payments.account: `20005550267/0100` (string) - The external account that originates or receives the payment.
+        + paymentMethods.type: deposit, invoice, creditNote (enum, required) - Type of payment.
+        + paymentMethods.paymentMethod: paymentOrder, collectionOrder, SIPO, postalOrder (enum, required) - Method of payment.
+        + paymentMethods.account: `20005550267/0100` (string) - The external account that originates or receives the payment.
         + customer.id: `1001` (number, required) - Customer id.
+        + transactions.supplyPoint.id: `30001` (number, required) - Supply point id.
+        + transactions.documentType: `???` (enum, required) - Type of document.
+        + transactions.documentVariableSymbol: `555666777` (string) - Variable symbol of the document.
+        + transactions.paymentVariableSymbol: `777666555` (string) - Variable symbol of the payment.
+        + transactions.invoicedAmount: `1234.56` (number) - Invoiced amount including VAT.
+        + transactions.depositAmountBilled: `789.12` (number) - Deposit amount billed.
+        + transactions.depositAmountUnbilled: `345.67` (number) - Deposit amount unbilled.
+        + transactions.documentDate: `2015-12-31` (string) - Date of document.
+        + transactions.debitAccount: `???`
+        + transactions.creditAccount: `???`
+        + transactions.dueDate: `2016-01-25` (string) - Date the payment is due.
+        + transactions.paymentDate: `2016-01-24` (string) - Date the payment was made / received.
+        + optouts.type: `???` (enum, required) - Type of opt-out.
+        + optouts.status: active, inactive (enum, required) - Status of the opt-out.
 
     + Body
 
@@ -109,10 +122,9 @@ Retrieve the detail of an account by its id.
                 "invoiceDeliveryType": "letter",
                 "invoiceMaturity": "???",
                 "overpaymentSettlementType": "paymentOrder",
-                "paymentMethod": "SIPO",
                 "currency": "CZK",
                 "status": "active",
-                "payments": [
+                "paymentMethods": [
                     {
                         "type": "deposit",
                         "paymentMethod": "SIPO",
@@ -125,11 +137,58 @@ Retrieve the detail of an account by its id.
                     },
                     {
                         "type": "creditNote",
-                        "paymentMethod": "paymentOrder",
-                        "account": "20005550267/0100"
+                        "paymentMethod": "postalOrder"
                     }
                 ],
                 "customer": {
                     "id": 1001
-                }
+                },
+                "transactions": [
+                    {
+                        "supplyPoint": {
+                            "id": 30001
+                        },
+                        "documentType": "???",
+                        "documentVariableSymbol": "555666777",
+                        "paymentVariableSymbol": "777666555",
+                        "invoicedAmount": 1234.56,
+                        "depositAmountBilled": 789.12,
+                        "depositAmountUnbilled": 345.67,
+                        "documentDate": "2015-12-31",
+                        "debitAccount": "???",
+                        "creditAccount": "???",
+                        "dueDate": "2016-01-25",
+                        "paymentDate": "2016-01-24"
+                    },
+                    {
+                        "supplyPoint": {
+                            "id": 30002
+                        },
+                        "documentType": "???",
+                        "documentVariableSymbol": "555666778",
+                        "paymentVariableSymbol": "777666556",
+                        "invoicedAmount": 2345.67,
+                        "depositAmountBilled": 890.12,
+                        "depositAmountUnbilled": 456.78,
+                        "documentDate": "2015-12-30",
+                        "debitAccount": "???",
+                        "creditAccount": "???",
+                        "dueDate": "2016-01-27",
+                        "paymentDate": "2016-01-26"
+                    }
+                ],
+                "optouts": [
+                    {
+                        "type": "???",
+                        "status": "active"
+                    },
+                    {
+                        "type": "???",
+                        "status": "inactive"
+                    },
+                    {
+                        "type": "???",
+                        "status": "active"
+                    }
+                ]
             }
