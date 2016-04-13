@@ -91,7 +91,7 @@ Retrieve the detail of an account by its id.
         + id: `2001` (number, required) - Id of the account.
         + accountNumber: `12345678` (string, required) - Account number.
         + invoiceDeliveryType: letter, registeredLetter, email, databox (enum, required) - Type of invoice delivery.
-        + invoiceMaturity: `???` (enum, required) - Invoice maturity.
+        + invoiceMaturity: sent5, sent14, sent21, sent60, created10, created15, created20 (enum, required) - Invoice maturity.
         + overpaymentSettlementType: paymentOrder, postalOrder (enum, required) - Type of overpayment settlement.
         + currency: `CZK` (string, required) - Account currency.
         + status: active, inactive (enum, required) - Status of the account.
@@ -109,11 +109,11 @@ Retrieve the detail of an account by its id.
         + transactions.depositAmountBilled: `789.12` (number) - Deposit amount billed.
         + transactions.depositAmountUnbilled: `345.67` (number) - Deposit amount unbilled.
         + transactions.documentDate: `2015-12-31` (string) - Date of document.
-        + transactions.debitAccount: `???`
-        + transactions.creditAccount: `???`
+        + transactions.debit: `234.56` (number) - Amount debited.
+        + transactions.credit: `234.56` (number) - Amount credited.
         + transactions.dueDate: `2016-01-25` (string) - Date the payment is due.
         + transactions.paymentDate: `2016-01-24` (string) - Date the payment was made / received.
-        + optouts.type: `???` (enum, required) - Type of opt-out.
+        + optouts.type: collection, accountAssignment, overpayment, reminder, smsReminder, interest, refund (enum, required) - Type of opt-out.
         + optouts.status: active, inactive (enum, required) - Status of the opt-out.
 
     + Body
@@ -122,7 +122,7 @@ Retrieve the detail of an account by its id.
                 "id": 2001,
                 "accountNumber": "12345678",
                 "invoiceDeliveryType": "letter",
-                "invoiceMaturity": "???",
+                "invoiceMaturity": "sent14",
                 "overpaymentSettlementType": "paymentOrder",
                 "currency": "CZK",
                 "status": "active",
@@ -167,8 +167,8 @@ Retrieve the detail of an account by its id.
                         "depositAmountBilled": 789.12,
                         "depositAmountUnbilled": 345.67,
                         "documentDate": "2015-12-31",
-                        "debitAccount": "???",
-                        "creditAccount": "???",
+                        "debitAccount": 234.56,
+                        "creditAccount": 0,
                         "dueDate": "2016-01-25",
                         "paymentDate": "2016-01-24"
                     },
@@ -183,23 +183,23 @@ Retrieve the detail of an account by its id.
                         "depositAmountBilled": 890.12,
                         "depositAmountUnbilled": 456.78,
                         "documentDate": "2015-12-30",
-                        "debitAccount": "???",
-                        "creditAccount": "???",
+                        "debitAccount": 0,
+                        "creditAccount": 234.56,
                         "dueDate": "2016-01-27",
                         "paymentDate": "2016-01-26"
                     }
                 ],
                 "optouts": [
                     {
-                        "type": "???",
+                        "type": "reminder",
                         "status": "active"
                     },
                     {
-                        "type": "???",
+                        "type": "interest",
                         "status": "inactive"
                     },
                     {
-                        "type": "???",
+                        "type": "overpayment",
                         "status": "active"
                     }
                 ]
