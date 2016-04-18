@@ -102,7 +102,7 @@ Retrieve the detail of an account by its id.
         + contracts.id: `5001` (number, required) - Contract id.
         + contracts.contractNumber: `6000432` (number, required) - Contract number.
         + transactions.supplyPoint.id: `30001` (number, required) - Supply point id.
-        + transactions.documentType: `???` (enum, required) - Type of document.
+        + transactions.documentType: advancePayment, invoicePayment, advanceReceivablePayment, invoiceReceivable, genericInvoiceReceivable (enum, required) - Type of document.
         + transactions.documentVariableSymbol: `555666777` (string) - Variable symbol of the document.
         + transactions.paymentVariableSymbol: `777666555` (string) - Variable symbol of the payment.
         + transactions.invoicedAmount: `1234.56` (number) - Invoiced amount including VAT.
@@ -160,7 +160,7 @@ Retrieve the detail of an account by its id.
                         "supplyPoint": {
                             "id": 30001
                         },
-                        "documentType": "???",
+                        "documentType": invoiceReceivable,
                         "documentVariableSymbol": "555666777",
                         "paymentVariableSymbol": "777666555",
                         "invoicedAmount": 1234.56,
@@ -176,7 +176,7 @@ Retrieve the detail of an account by its id.
                         "supplyPoint": {
                             "id": 30002
                         },
-                        "documentType": "???",
+                        "documentType": invoicePayment,
                         "documentVariableSymbol": "555666778",
                         "paymentVariableSymbol": "777666556",
                         "invoicedAmount": 2345.67,
